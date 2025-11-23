@@ -16,16 +16,28 @@ assessmentButton.addEventListener( //イベント検知設定の追加
   //診断結果エリアの作成
   resultDivision.innerText = '';//divタグを空文字で上書きすることで、空にしている
   tweetDivision.innerText = '';
-  const header = document.createElement('h3'); //h3タグの作成
-  header.innerText = '診断結果'; //タグの内側のテキストを設定
-  resultDivision.appendChild(header); //divタグの子要素として追加
+  const headerDivision = document.createElement('div'); //h3タグの作成
+  headerDivision.setAttribute('class','card-header text-bg-primary');
+  headerDivision.innerText = '診断結果'; //タグの内側のテキストを設定
+  resultDivision.appendChild(headerDivision)//divタグの子要素として追加
+  
+  // bodyDivision の作成
+  const bodyDivision = document.createElement('div');
+  bodyDivision.setAttribute('class', 'card-body');
 
-  const paragraph = document.createElement('p');//pタグの作成
-  const result = assessment(userName);//診断結果の作成
-  paragraph.innerText = result //pタグの内側のテキストの設定
-  resultDivision.appendChild(paragraph)//divタグの子要素としてpタグの作成
+  const paragraph = document.createElement('p');
+  paragraph.setAttribute('class', 'card-text');
+  const result = assessment(userName);
+  paragraph.innerText = result;
+  bodyDivision.appendChild(paragraph);
 
-    // X投稿ボタンの作成
+  // resultDivision に Bootstrap のスタイルを適用する
+  resultDivision.setAttribute('class', 'card');
+
+  // headerDivision と bodyDivision を resultDivision に差し込む
+  resultDivision.appendChild(headerDivision);
+  resultDivision.appendChild(bodyDivision);
+  // X投稿ボタンの作成
   tweetDivision.innerText = '';
   const anchor = document.createElement('a');
   const hrefValue = 'https://twitter.com/intent/tweet?button_hashtag=' +
